@@ -89,6 +89,7 @@
           <span class="window-title">03 // ALPHA_RESULT_BUFFER</span>
           <div class="window-actions">
             <span class="window-hint">BEFORE ← | → AFTER</span>
+            <button id="loupe-toggle" class="mini-btn" type="button" aria-pressed="false">LOUPE: OFF</button>
             <button id="open-modal-btn" class="mini-btn" type="button">ENLARGE</button>
           </div>
         </div>
@@ -101,6 +102,10 @@
               <div class="preview-label after-label">AFTER // ALPHA</div>
             </div>
             <div class="slider-handle" id="slider-handle" aria-hidden="true"><span>‹</span><span>›</span></div>
+            <div id="loupe" class="loupe hidden" aria-hidden="true">
+              <canvas id="loupe-canvas" width="440" height="440"></canvas>
+              <span class="loupe-badge">3× AFTER</span>
+            </div>
           </div>
           <div class="preview-caption">DRAG THE NEON DIVIDER // LEFT = ORIGINAL // RIGHT = RESTORED</div>
           <div class="action-bar">
