@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG-DeFaker // Alpha-Restore</title>
+    <!-- OpenCV.js for Advanced Computer Vision -->
+    <script async src="https://docs.opencv.org/4.x/opencv.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- CRT Overlay for scanlines and flicker -->
+    <div class="crt-overlay"></div>
+    <div class="scanline"></div>
+
+    <!-- Boot Sequence Screen -->
+    <div id="boot-screen" class="screen">
+        <div id="terminal-output"></div>
+        <div id="cursor">_</div>
+    </div>
+
+    <!-- Main App Screen -->
+    <div id="app-screen" class="screen hidden">
+        <header>
+            <h1 class="glitch" data-text="PNG-DeFaker">PNG-DeFaker</h1>
+            <div class="version">SYS_VER: 2.0.4-BETA // ALPHA_RECOVERY_MODE</div>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <div class="drop-zone" id="drop-zone">
+                    <p>DRAG & DROP TARGET IMAGE</p>
+                    <p class="sub-text">[OR CLICK TO SELECT FILE]</p>
+                    <input type="file" id="file-input" accept="image/*" hidden>
+                </div>
+            </section>
+
+            <section class="controls-section hidden" id="controls">
+                <div class="control-group">
+                    <label for="method-select">RECOVERY METHOD</label>
+                    <select id="method-select" class="cyber-select">
+                        <option value="global">GLOBAL_STRIP (BASIC)</option>
+                        <option value="flood">SMART_FLOOD (SHELLED)</option>
+                        <option value="contour">CV_CONTOUR (ISOLATION)</option>
+                        <option value="lumina">LUMINA_MASK (GRADIENT)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="bg-color">TARGET BG COLOR</label>
+                    <input type="color" id="bg-color" value="#ffffff">
+                </div>
+                <div class="control-group">
+                    <label for="tolerance">TOLERANCE: <span id="tol-val">10</span></label>
+                    <input type="range" id="tolerance" min="0" max="100" value="10">
+                </div>
+                <div class="grid-config-section">
+                    <p class="section-label">GRID_CONFIG // TRANSPARENCY_VISUALIZER</p>
+                    <div class="control-group">
+                        <label for="grid-size">SQUARE_SIZE</label>
+                        <input type="range" id="grid-size" min="4" max="64" value="16">
+                    </div>
+                    <div class="control-group">
+                        <label for="grid-color-1">COLOR_A</label>
+                        <input type="color" id="grid-color-1" value="#2a2a2a">
+                    </div>
+                    <div class="control-group">
+                        <label for="grid-color-2">COLOR_B</label>
+                        <input type="color" id="grid-color-2" value="#3a3a3a">
+                    </div>
+                </div>
+                <button id="process-btn" class="cyber-btn">EXECUTE DE-FAKE</button>
+            </section>
+
+            <section class="preview-section hidden" id="preview">
+                <div class="comparison-slider" id="comparison-slider">
+                    <img id="img-orig" src="" alt="Original">
+                    <div class="after-layer" id="after-layer">
+                        <canvas id="canvas-result"></canvas>
+                    </div>
+                    <div class="slider-handle" id="slider-handle">
+                        <div class="handle-circle">
+                            <span>&#10094;</span>
+                            <span>&#10095;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-bar">
+                    <button id="download-btn" class="cyber-btn secondary">EXPORT 32-BIT PNG</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="status-bar">
+                <span>STATUS: <span id="sys-status">IDLE</span></span>
+                <span>MEM: <span id="sys-mem">0.00MB</span></span>
+                <span>CORE: <span id="sys-core">STABLE</span></span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
